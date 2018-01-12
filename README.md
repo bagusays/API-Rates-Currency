@@ -5,6 +5,7 @@ API from Webscraping X-Rates. Build with Flask (Python)
 1.  `/` or `/?q=CODE` (default `/` is USD)
 ```
 {
+"From": "USD",
 "status": 200,
 "updatedTime": "Fri, 12 Jan 2018 16:00:00 GMT",
 "result": [
