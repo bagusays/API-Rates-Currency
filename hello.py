@@ -9,6 +9,7 @@ import urllib.parse as urlparse
 app = Flask(__name__)
 
 base_url = "http://www.x-rates.com/"
+defaultCurrency = "USD"
 
 def convertTime(findTime):
     local_timezone = tzlocal.get_localzone()
@@ -16,7 +17,7 @@ def convertTime(findTime):
     local_time = utc_time.replace(tzinfo=pytz.utc).astimezone(local_timezone)
     return local_time
 
-def getTable(paramTo = "IDR"):
+def getTable(paramTo = defaultCurrency):
     result = {}
     url = requests.get(base_url + "table/?from=%s&amount=1" %paramTo)
     soup = BeautifulSoup(url.text, "html.parser")
@@ -29,7 +30,8 @@ def getTable(paramTo = "IDR"):
 
 @app.route("/")
 def getAllCurrency():
-    getSoup = getTable()
+    qParamFrom = request.args.get('q')
+    getSoup = getTable(qParamFrom) if qParamFrom != None else getTable()
     result = {}
 
     r = []
@@ -43,9 +45,10 @@ def getAllCurrency():
                 'Code'  : resultParam,
                 'Name'  : cell[0].text,
                 'Price': float(cell[1].text),
-                'PriceInverted' : float(round(float(cell[2].text),2))
+                'PriceInverted' : float(cell[2].text)
             })
 
+    result['From'] =  qParamFrom if qParamFrom != None else defaultCurrency
     result['status'] = getSoup['status']
     result['updatedTime'] = getSoup['updatedTime']
     result['result'] = r
