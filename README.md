@@ -2,7 +2,7 @@
 API from Webscraping X-Rates. Build with Flask (Python)
 
 ### Output
-1.  `/`
+1.  `/` / `/?q=CODE` (default `/` is USD)
 ```
 {
 "status": 200,
