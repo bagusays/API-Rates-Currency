@@ -1,5 +1,5 @@
 # API-Rates-Currency
-API from Webscraping X-Rates. Build with Flask (Python)
+API for Currency Exchange from Webscraping X-Rates. Build with Flask (Python)
 
 ### Output
 1.  `/` or `/?q=CODE` (default `/` is USD)
