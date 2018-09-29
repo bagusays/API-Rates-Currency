@@ -1,5 +1,6 @@
 # API-Rates-Currency
 API for Currency Exchange from Webscraping X-Rates. Build with Flask (Python)
+https://api-xrates-heroku.herokuapp.com/
 
 ### Output
 1.  `/` or `/?q=CODE` (default `/` is USD)
